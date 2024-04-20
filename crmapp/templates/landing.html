@@ -1,0 +1,602 @@
+<html>
+<head>
+<title>CSS Navigation</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+{% load static %}
+
+<style>
+    @media (max-width: 600px) {
+        .navbar-nav .nav-link {
+            font-size: 2rem; /* Adjust the font size as needed */
+        }
+    }
+</style>
+
+
+<style>
+    .container {
+        display: flex;
+        align-items: center;
+    }
+    .text {
+        flex: 1;
+        padding: 20px;
+        margin-left: 100px;
+        transition: transform 0.3s ease;
+    }
+    .text:hover{
+        animation: pulse 0.5s infinite alternate; /* Apply the pulse animation on hover */
+    }
+    .image {
+        flex: 1;
+        text-align: right;
+        margin-right: 100px;
+    }
+    .image img {
+        transition: transform 0.3s ease;
+    }
+    .image img:hover {
+        animation: pulse 0.5s infinite alternate; /* Apply the pulse animation on hover */
+    }
+    
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(1.1);
+        }
+    }
+
+    /* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black with opacity */
+}
+
+.modal-content {
+    background-color: #088;
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Could be more or less, depending on screen size */
+    border-radius: 10px;
+    animation: dance 2s infinite; /* Apply the dance animation */
+}
+
+        /* Close button */
+        .close {
+            color: brown;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Form styles */
+        .login-form input[type="text"],
+        .login-form input[type="password"],
+        .login-form input[type="submit"] {
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-form input[type="submit"] {
+            background-color: brown;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-form input[type="submit"]:hover {
+            background-color: black;
+        }
+
+        @keyframes dance {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+        .card-container {
+            display: flex;
+            justify-content: space-between; /* Adjust spacing between cards */
+            flex-wrap: wrap; /* Allow wrapping to next line */
+            max-width: 1000px; /* Example max-width for responsiveness */
+            margin: 0 auto; /* Center align */
+        }
+        .card {
+            width: calc(25% - 20px); /* Adjust width based on desired spacing */
+            margin-bottom: 20px; /* Adjust margin between cards */
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        fieldset {
+            background-color: whitesmoke;
+            border: whitesmoke;
+        }
+        h3 {
+            text-align: center;
+            text-transform: uppercase;
+            font-family: italic;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            color: #088;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .container {
+            display: flex;
+            justify-content: center; /* Center align the iframes */
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        iframe {
+            width: 100%; /* Make iframes responsive */
+            max-width: 550px; /* Limit maximum width */
+            height: 400px; /* Fixed height */
+            border-radius: 5px;
+            margin-right: 20px; /* Adjust spacing between iframes */
+            margin-bottom: 20px; /* Adjust spacing between iframes on smaller screens */
+        }
+        @media screen and (min-width: 768px) {
+            .container {
+                justify-content: space-between; /* Adjust alignment for larger screens */
+            }
+            iframe {
+                width: calc(50% - 10px); /* Each iframe takes 50% of the container width with a margin of 20px between them */
+                margin-right: 0; /* Remove margin between iframes */
+                margin-bottom: 0; /* Remove bottom margin on larger screens */
+            }
+        }
+</style>
+<style>
+   
+    input[type=text], textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        margin-top:16px;
+        resize: vertical;
+    }
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+    .container {
+        border-radius: 5px;
+        padding: 20px;
+    }
+    @media screen and (max-width: 600px) {
+        input[type=text], textarea, input[type=submit] {
+            width: 100%;
+            margin-top: 0;
+        }
+    }
+</style>
+</head>
+<body>
+    <!--navbar-->
+
+    <nav class="navbar navbar-expand-lg mt-3 p-3 navbar-light" style="background-color: #088;">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand" style="font-size:30px;margin-left:100px;color:whitesmoke;"><b>CRM</b></a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav">
+                   
+                </div>
+                <form class="d-flex">
+                    <div class="navbar-nav">
+                        <a href="#" class="nav-item nav-link active"style="color:whitesmoke;"><b>Home</b></a>
+                        <a href="{% url 'page1' %}" class="nav-item nav-link active"style="color:whitesmoke;"><b>Dashboard</b></a>
+                        <a href="#" class="nav-item nav-link active"style="color:whitesmoke;"><b>Contact</b></a>
+                        
+                    </div>
+                </form>
+                <div class="navbar-nav">
+                    <a href="#" class="nav-item nav-link" style="margin-right:100px;color:whitesmoke;"  id="myBtn"><b>Login</b></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    
+        <img src="https://blog.engineroomtech.com/hs-fs/hubfs/original_1228059775.jpg?width=6000&name=original_1228059775.jpg" alt="Your Logo" class="logo" style="width:100%;" >
+        
+   
+    
+
+<br>
+<!--hero-->
+<div class="container">
+    <div class="text">
+        <p><b>Customer Relationship Management (CRM)</b> is a technology that helps businesses manage their relationships and interactions with customers and potential customers.</p>
+        <p> The primary goal of CRM is to improve business relationships and facilitate growth.</p>
+    </div>
+    <div class="image">
+        <img src="https://th.bing.com/th/id/OIP.gkSU27CYLiFDlYSFirZqaAHaFq?w=608&h=465&rs=1&pid=ImgDetMain" alt="Sample Image">
+    </div>
+       
+</div>
+<br>
+<!--Problems and solutions-->
+<h3 style="text-align:center;text-transform:uppercase;font-family:italic;font-size:2rem;color: #088; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Problems and solutions</h3>
+<br><br>
+<div class="container">
+    <div class="image">
+        <iframe width="780" height="438" src="https://www.youtube.com/embed/y-4LBeLduvA" 
+        title="Disappointed Customers - Problem Solving" frameborder="0"
+         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  style="width:80%;border-radius:50px;margin-left:80px;height:250px;
+         transition: transform 0.3s ease;animation: pulse 0.5s infinite alternate;"></iframe>
+    </div>
+    <div class="text">
+        <h2>Problems & Solutions</h2><br>
+        <p><b style="font-size:2rem;">.</b> <b> The Time and Cost of Implementing CRM Software</b></p>
+        <p><b style="color:brown;">Solution:</b> This challenge can be mitigated by choosing an off-the-shelf solution from a reputable provider
+             instead of building your own CRM from scratch. Look for a solution that offers flexibility as you grow and adapt,
+             as well as meeting all current regulatory standards for handling consumer data.</p>
+    </div>
+   
+</div>
+<br><br>
+
+<!--Benefits-->
+<fieldset style="background-color:whitesmoke;border:whitesmoke;">
+    <h3 style="text-align:center;text-transform:uppercase;font-family:italic;font-size:2rem;margin-top:30px;color: #088; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Benefits</h3>
+<div class="container" style="margin-top:30px;">
+    
+    <div class="text">
+        <p style="font-size:1rem;color:brown;"><b>Better client relationships</b></p>
+        <p>By having access to a unified view of contact and customer information, 
+            you can better know who's who and provide personalized, thoughtful service and support.
+
+            By receiving in-app notifications of customer inquiries across multiple channels
+             (social media, web form, email, voice, and more), your response times will be faster; 
+             automation tools for transferring inquiries to the most relevant agents and collaborative tools 
+             to involve multiple team members also make your responses smarter and speed up issue resolution times.
+            
+            CRM systems can dramatically improve customer experience, helping you retain existing customers 
+            and turn leads into new customers.</p>
+    </div>
+    <div class="image">
+        <img src="https://dq51jve9h21d4.cloudfront.net/sites/default/files/imce/xcrmland_benefits_of_crm_better_relationships-01.png.pagespeed.ic.lvh148UmEa.webp" alt="Sample Image" style="width:500px;">
+    </div>
+     
+</div>
+<br><br>
+<div class="container" style="margin-top:30px;">
+    <div class="image">
+        <img src="https://dq51jve9h21d4.cloudfront.net/sites/default/files/imce/xcrmland_benefits_of_crm_organize_customer_information.png.pagespeed.ic.uQpClUckNf.webp" alt="Sample Image" style="width:500px;">
+    </div>
+     
+    <div class="text">
+        <p><b style="font-size:1rem;color:brown;">Organize customer information</b></p>
+        <p>With CRM, all your customer data across channels is consolidated in one place.
+             You can easily track who's who, log notes on individuals, and see the history of each customer's 
+             interactions with your company. For example, you can get more details on customer behavior such as when 
+             they visited your website, if/when they spoke to a sales, support, or service teams, and what they've purchased.
+
+            This allows you to see where your customer is in the customer
+             life cycle or journey and segment customers according to interactions with your company.
+              CRM contact organization tools also have tools for eliminating duplicate customer profiles. </p>
+    </div>
+   
+</div>
+<br><br>
+</fieldset>
+<br><br>
+<!--Features-->
+<h3 style="text-align:center;text-transform:uppercase;font-family:italic;font-size:2rem;margin-top:30px;color: #088; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Features</h3><br>
+<img src="https://i.ytimg.com/vi/MkpI3EPuQyM/maxresdefault.jpg" alt="Image 1" style="width:100%">
+
+<!--signin modal-->
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        
+        <div class="login-form">
+            <span class="close">&times;</span>
+            <h2 style="color:white;">Login</h2>
+            <form>
+                <input type="text" placeholder="Username" required>
+                <input type="password" placeholder="Password" required>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<!--Testimonials-->
+
+<fieldset style=" background-color: whitesmoke;border: whitesmoke;">
+    <h3 style="text-align: center;text-transform: uppercase;font-family: italic;font-size: 2rem;margin-top: 30px;color: #088; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Testimonials</h3>
+    <div class="container" >
+        <iframe src="https://www.youtube.com/embed/tOwjEOt1zYU" title="Customer Testimonial Video Examples | Video Marketing Ideas" 
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen ></iframe>
+        <iframe width="780" height="438" src="https://www.youtube.com/embed/R1pl21uZ63c"  
+        title="How To Get Truly Memorable (B2B) Customer Testimonial Videos" frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen ></iframe>
+    </div>
+    <br><br><br>
+</fieldset>
+
+<!--faq-->
+<h3 style="text-align: center;text-transform: uppercase;font-family: italic;font-size: 2rem;margin-top: 30px;color: #088; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">FAQ</h3>
+<br>
+<div class="card-container">
+    <div class="card">
+        <!-- Card content goes here -->
+        <h3 style="text-align:center"> What is CRM?</h3><br>
+        <p>CRM stands for Customer Relationship Management and it enables companies to manage business-related processes and all the data associated with them.</p>
+    </div>
+    <div class="card">
+        <!-- Card content goes here -->
+        <h3 style="text-align:center"> What modules can be included in CRM?</h3>
+        <br>
+        <p>The most popular modules are Sales, Marketing, and Service, however, these can be modified or go under other names,
+             for example: Client Management, Order Management, Invoice Management, Events and Tasks Management, System Dashboard, etc.</p>
+    </div>
+    <div class="card">
+        <!-- Card content goes here -->
+        <h3 style="text-align:center">  What is the difference between ERP and CRM? How can they be integrated?</h3>
+        <br>
+        <p>Not every company needs to have both applications. 
+            However, the combination allows large companies to mix the vital data 
+            from each system and get a comprehensive business outlook.</p>
+    </div>
+    <div class="card">
+        <!-- Card content goes here -->
+        <h3 style="text-align:center">How can I handle Analytics within CRM?</h3>
+        <br>
+        <p>Normally, analytics section in CRM is represented by reports and dashboards
+             helping you to collect and visualise your customer data, engagement levels,
+              sales reps productivity, won/lost opportunities ratio, to name a few. 
+              Integration with external analytical services such as Google Analytics, or Talend is also available.</p>
+    </div>
+    
+    
+</div>
+
+<!--contact-->
+<h3 style="text-align: center;text-transform: uppercase;font-family:
+ italic;font-size: 2rem;margin-top: 30px;color: #088; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Contact</h3>
+<br>
+<div class="container" style="display: flex;align-items: flex-start;background-color: #f2f2f2;">
+    <div class="image-container" style="flex: 1;">
+        <img src="https://cdn1.iconfinder.com/data/icons/hands-pt-6/100/022_-_pointer-1024.png" alt="Image 1" style="max-width: 100%;display: block;width:500px;
+        transition: transform 0.3s ease;animation: pulse 0.5s infinite alternate; ">
+    </div>
+    <div class="form-container" style="flex: 1;">
+        <form action="/submit" method="post" style="width: 100%;">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="Your email..">
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Write something.." style="height:200px"></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+<br>
+<br>
+<!-- Footer -->
+<!-- Footer -->
+<footer class="text-center text-lg-start text-muted" style="background-color: rgba(0, 0, 0, 0.05);">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block" style="color: #088;">
+        <span>Get connected with us on social networks:</span>
+      </div>
+      <!-- Left -->
+  
+      <!-- Right -->
+      <div >
+        <a href="" class="me-4 text-reset" style="padding:20px;">
+          <i class="fab fa-facebook-f"  style="color: #088;"></i>
+        </a>
+        <a href="" class="me-4 text-reset"style="padding:20px;">
+          <i class="fab fa-twitter"  style="color: #088;"></i>
+        </a>
+        <a href="" class="me-4 text-reset"style="padding:20px;">
+          <i class="fab fa-google"  style="color: #088;"></i>
+        </a>
+        <a href="" class="me-4 text-reset"style="padding:20px;">
+          <i class="fab fa-instagram"  style="color: #088;"></i>
+        </a>
+        <a href="" class="me-4 text-reset"style="padding:20px;">
+          <i class="fab fa-linkedin"  style="color: #088;"></i>
+        </a>
+        <a href="" class="me-4 text-reset"style="padding:20px;">
+          <i class="fab fa-github"  style="color: #088;"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4" style="color: #088;">
+              <i class="fas fa-gem me-3" style="color: #088;"></i>CRM
+            </h6>
+            <p style="color: #088;">
+              Here you can use rows and columns to organize your footer content. Lorem ipsum
+              dolor sit amet, consectetur adipisicing elit.
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4" style="color: #088;">
+              Products
+            </h6>
+            <p style="color: #088;">
+              <a href="#!" class="text-reset" style="color: #088;">Angular</a>
+            </p>
+            <p style="color: #088;">
+              <a href="#!" class="text-reset" style="color: #088;">React</a>
+            </p>
+            <p style="color: #088;">
+              <a href="#!" class="text-reset" style="color: #088;">Vue</a>
+            </p>
+            <p style="color: #088;">
+              <a href="#!" class="text-reset" style="color: #088;">Laravel</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4" style="color: #088;">
+              Useful links
+            </h6>
+            <p style="color: #088;">
+              <a href="#!" class="text-reset" style="color: #088;">Pricing</a>
+            </p>
+            <p style="color: #088;">
+              <a href="#!" class="text-reset" style="color: #088;">Settings</a>
+            </p>
+            <p style="color: #088;">
+              <a href="#!" class="text-reset" style="color: #088;">Orders</a>
+            </p>
+            <p style="color: #088;">
+              <a href="#!" class="text-reset" style="color: #088;">Help</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4" style="color: #088;">Contact</h6>
+            <p style="color: #088;"><i class="fas fa-home me-3" style="color: #088;"></i> New York, NY 10012, US</p>
+            <p style="color: #088;">
+              <i class="fas fa-envelope me-3" style="color: #088;"></i>
+              info@example.com
+            </p>
+            <p style="color: #088;"><i class="fas fa-phone me-3" style="color: #088;"></i> + 01 234 567 88</p>
+            <p style="color: #088;"><i class="fas fa-print me-3" style="color: #088;"></i> + 01 234 567 89</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+  
+    
+  </footer>
+<script>
+    $(document).ready(function() {
+        $('nav ul li a:not(:only-child)').click(function(e) {
+            $(this).siblings('.nav-dropdown').toggle();
+            e.stopPropagation();
+        });
+    
+        $('html').click(function(){
+            $('.nav-dropdown').hide();
+        })
+        $('#nav-toggle').click(function(){
+            $('nav ul').slideToggle();
+        })
+        $('#nav-toggle').on('click', function(){
+            this.classList.toggle('active');
+        });
+    });
+</script>
+
+</script>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="script.js"></script>
+</body>
+</html>
